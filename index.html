@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>doc</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/aos.css">
+
+    <link rel="stylesheet" href="css/ionicons.min.css">
+
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/jquery.timepicker.css">
+
+    
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="./SimpleChatbot-1.3.2/chatbot/chatbot.css">
+	
+  </head>
+  <body>
+
+	<div class="chatbot__btn">
+		<div class="chatbot__tooltip d-none">
+			<a href="@Naryn_bot"></a>
+		</div>
+	  </div>
+	
+	
+	  <script>
+		"use strict"
+		const configChatbot = {};
+		configChatbot.btn = '.chatbot__btn';
+		configChatbot.key = 'fingerprint';
+		configChatbot.replicas = './SimpleChatbot-1.3.2/data/data.json';
+		configChatbot.root = SimpleChatbot.createTemplate();
+		configChatbot.url = './SimpleChatbot-1.3.2/chatbot/chatbot.php';
+		let chatbot = null;
+		let fingerprint = localStorage.getItem(configChatbot.key);
+		if (!fingerprint) {
+		  Fingerprint2.get(function (components) {
+			fingerprint = Fingerprint2.x64hash128(components.map(function (pair) {
+			  return pair.value
+			}).join(), 31)
+			localStorage.setItem(configChatbot.key, fingerprint)
+		  });
+		}
+		document.querySelector(configChatbot.btn).onclick = function (e) {
+		  this.classList.add('d-none');
+		  const $tooltip = this.querySelector('.chatbot__tooltip');
+		  if ($tooltip) {
+			$tooltip.classList.add('d-none');
+		  }
+		  configChatbot.root.classList.toggle('chatbot_hidden');
+		  if (chatbot) {
+			return;
+		  }
+	
+		  const request = new XMLHttpRequest();
+		  request.open('GET', configChatbot.replicas, true);
+		  request.responseType = 'json';
+		  request.onload = function () {
+			const status = request.status;
+			if (status === 200) {
+			  const data = request.response;
+			  if (typeof data === 'string') {
+				configChatbot.replicas = JSON.parse(data);
+			  } else {
+				configChatbot.replicas = data;
+			  }
+			
+			  chatbot = new SimpleChatbot(configChatbot);
+			  chatbot.init();
+			} else {
+			  console.log(status, request.response);
+			}
+		  };
+		  request.send();
+		};
+	
+		// подсказка для кнопки
+		const $btn = document.querySelector(configChatbot.btn);
+		$btn.addEventListener('mouseover', function (e) {
+		  const $tooltip = $btn.querySelector('.chatbot__tooltip');
+		  if (!$tooltip.classList.contains('chatbot__tooltip_show')) {
+			$tooltip.classList.remove('d-none');
+			setTimeout(function () {
+			  $tooltip.classList.add('chatbot__tooltip_show');
+			}, 0);
+		  }
+		});
+		$btn.addEventListener('mouseout', function (e) {
+		  const $tooltip = $btn.querySelector('.chatbot__tooltip');
+		  if ($tooltip.classList.contains('chatbot__tooltip_show')) {
+			$tooltip.classList.remove('chatbot__tooltip_show');
+			setTimeout(function () {
+			  $tooltip.classList.add('d-none');
+			}, 200);
+		  }
+		});
+	
+		setTimeout(function () {
+		  const tooltip = document.querySelector('.chatbot__tooltip');
+		  tooltip.classList.add('chatbot__tooltip_show');
+		  setTimeout(function () {
+			tooltip.classList.remove('chatbot__tooltip_show');
+		  }, 10000)
+		}, 10000);
+	  </script>
+	
+	
+
+		
+
+	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="index.html">
+			  <img class="logo" src="./images/Naryn win (1).png" alt="">
+		  </a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+	          <li class="nav-item"><a href="destination.html" class="nav-link">Destination</a></li>
+	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+	          <li class="nav-item cta"><a href="https://t.me/Naryn_bot" class="nav-link">Telegram Bot</a></li>
+
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+    <!-- END nav -->
+    
+    <div class="hero-wrap js-fullheight" style="background-image: url('images/sayt/Naryn/Naryn_overlook.jpg');" data-stellar-background-ratio="0.3">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
+            <h1 data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Make Your Tour Amazing With Us</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="ftco-section ftco-no-pb ftco-no-pt">
+    	<div class="container">
+	    	<div class="row">
+					<div class="col-md-12">
+						<div class="search-wrap-1 ftco-animate p-4">
+							<form action="#" class="search-property-1">
+		        		<div class="row">
+		        			<div class="col-lg align-items-end">
+		        				<div class="form-group">
+		        					<label for="#">Destination</label>
+		          				<div class="form-field">
+		          					<div class="icon"><span class="ion-ios-search"></span></div>
+				                <input type="text" class="form-control" placeholder="Search place">
+				              </div>
+			              </div>
+		        			</div>
+		        			<div class="col-lg align-items-end">
+		        				<div class="form-group">
+		        					<label for="#">Check-in date</label>
+		        					<div class="form-field">
+		          					<div class="icon"><span class="ion-ios-calendar"></span></div>
+				                <input type="text" class="form-control checkin_date" placeholder="Check In Date">
+				              </div>
+			              </div>
+		        			</div>
+		        			<div class="col-lg align-items-end">
+		        				<div class="form-group">
+		        					<label for="#">Check-out date</label>
+		        					<div class="form-field">
+		          					<div class="icon"><span class="ion-ios-calendar"></span></div>
+				                <input type="text" class="form-control checkout_date" placeholder="Check Out Date">
+				              </div>
+			              </div>
+		        			</div>
+		        			<div class="col-lg align-items-end">
+		        				<div class="form-group">
+		        					<label for="#">Price Limit</label>
+		        					<div class="form-field">
+		          					<div class="select-wrap">
+		                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+		                      <select name="" id="" class="form-control">
+		                        <option value="">$5,000</option>
+		                        <option value="">$10,000</option>
+		                        <option value="">$50,000</option>
+		                        <option value="">$100,000</option>
+		                        <option value="">$200,000</option>
+		                        <option value="">$300,000</option>
+		                        <option value="">$400,000</option>
+		                        <option value="">$500,000</option>
+		                        <option value="">$600,000</option>
+		                        <option value="">$700,000</option>
+		                        <option value="">$800,000</option>
+		                        <option value="">$900,000</option>
+		                        <option value="">$1,000,000</option>
+		                        <option value="">$2,000,000</option>
+		                      </select>
+		                    </div>
+				              </div>
+			              </div>
+		        			</div>
+		        			<div class="col-lg align-self-end">
+		        				<div class="form-group">
+		        					<div class="form-field">
+				                <input type="submit" value="Search" class="form-control btn btn-primary">
+				              </div>
+			              </div>
+		        			</div>
+		        		</div>
+		        	</form>
+		        </div>
+					</div>
+	    	</div>
+	    </div>
+	</section>
+	
+
+    <section class="ftco-section services-section bg-light">
+      <div class="container">
+        <div class="row d-flex">
+			
+          <div class="col-md-6 order-md-last heading-section pl-md-5 ftco-animate">
+          	<h2 class="mb-4">It's time to start your adventure with us</h2>
+            <p>Naryn is one of the cities of Kyrgyzstan. It is located 186 km from the border with China, at the intersection of the Bishkek-Torugart highway. Naryn is the administrative center of the Naryn region. Museums, institutes, various buildings of administrative and state importance are located here.
+
+				Like many other Central Asian cities, Naryn emerged as a small fortification on the trade routes that led from East Turkestan (Kashgar) to Central Asia. Until the 19th century, there was no city as such in this area. </p>
+            <p><a href="#" class="btn btn-primary py-3 px-4">Search Destination</a></p>
+		  </div>
+		  
+      </div>
+	</section>
+
+
+	
+    <section class="ftco-section ftco-no-pt">
+    	<div class="container">
+    		<div class="row justify-content-center pb-4">
+          <div class="col-md-12 heading-section text-center ftco-animate">
+            <h2 class="mb-4">Tour Destination</h2>
+          </div>
+        </div>
+        <div class="row">
+        	<div class="col-md-4 ftco-animate">
+        		<div class="project-wrap">
+        			<a href="#" class="img" style="background-image: url(images/sayt/Naryn/Kel_Suu/ks.jpg);"></a>
+        			<div class="text p-4">
+        				<span class="price">$70/person</span>
+        				<span class="days">3 Days Tour</span>
+        				<h3><a href="#">Kel - Suu</a></h3>
+        				<p class="location"><span class="ion-ios-map"></span> At - Bashy, Naryn</p>
+        				<ul>
+        					<li><span class="flaticon-shower"></span>2</li>
+        					<li><span class="flaticon-king-size"></span>2</li>
+        					<li><span class="flaticon-mountains"></span>Mountain</li>
+        				</ul>
+        			</div>
+        		</div>
+        	</div>
+        	<div class="col-md-4 ftco-animate">
+        		<div class="project-wrap">
+        			<a href="#" class="img" style="background-image: url(images/sayt/IK/ik.jpg);"></a>
+        			<div class="text p-4">
+        				<span class="price">$100/person</span>
+        				<span class="days">7 Days Tour</span>
+        				<h3><a href="#">Issyk - Kul Lake</a></h3>
+        				<p class="location"><span class="ion-ios-map"></span> Issyk -  Kul</p>
+        				<ul>
+        					<li><span class="flaticon-shower"></span>2</li>
+        					<li><span class="flaticon-king-size"></span>3</li>
+        					<li><span class="flaticon-sun-umbrella"></span>Near Beach</li>
+        				</ul>
+        			</div>
+        		</div>
+        	</div>
+        	
+
+        	<div class="col-md-4 ftco-animate">
+        		<div class="project-wrap">
+        			<a href="#" class="img" style="background-image: url(images/sayt/Osh/osh.jpg);"></a>
+        			<div class="text p-4">
+        				<span class="price">$90/person</span>
+        				<span class="days">5 Days Tour</span>
+        				<h3><a href="#">Sulaiman mountain</a></h3>
+        				<p class="location"><span class="ion-ios-map"></span> Osh</p>
+        				<ul>
+        					<li><span class="flaticon-shower"></span>2</li>
+        					<li><span class="flaticon-king-size"></span>3</li>
+        					<li><span class="flaticon-mountains"></span>Mountain</li>
+        				</ul>
+        			</div>
+        		</div>
+			</div>
+			
+			<div class="col-md-4 ftco-animate">
+        		<div class="project-wrap">
+        			<a href="#" class="img" style="background-image: url(images/sayt/batken/bts.jpg);"></a>
+        			<div class="text p-4">
+        				<span class="price">$100/person</span>
+        				<span class="days">5 Days Tour</span>
+        				<h3><a href="#">Aigul - gulu</a></h3>
+        				<p class="location"><span class="ion-ios-map"></span>Batken</p>
+        				<ul>
+        					<li><span class="flaticon-shower"></span>3</li>
+        					<li><span class="flaticon-king-size"></span>1</li>
+        					<li><span class="flaticon-mountains"></span>Mountain</li>
+        				</ul>
+        			</div>
+        		</div>
+        	</div>
+        	<div class="col-md-4 ftco-animate">
+        		<div class="project-wrap">
+        			<a href="#" class="img" style="background-image: url(images/sayt/Chu/chu.jpg);"></a>
+        			<div class="text p-4">
+        				<span class="price">$40/person</span>
+        				<span class="days">1 Days Tour</span>
+        				<h3><a href="#">Osh</a></h3>
+        				<p class="location"><span class="ion-ios-map"></span> Osh</p>
+        				<ul>
+        					<li><span class="flaticon-shower"></span>2</li>
+        					<li><span class="flaticon-king-size"></span>2</li>
+        					<li><span class="flaticon-mountainsx"></span>Mountain</li>
+        				</ul>
+        			</div>
+        		</div>
+        	</div>
+        	<div class="col-md-4 ftco-animate">
+        		<div class="project-wrap">
+        			<a href="#" class="img" style="background-image: url(images/sayt/talas/ts.jpg);"></a>
+        			<div class="text p-4">
+        				<span class="price">$60/person</span>
+        				<span class="days">2 Days Tour</span>
+        				<h3><a href="#">Manas Cumbos</a></h3>
+        				<p class="location"><span class="ion-ios-map"></span> Talas</p>
+        				<ul>
+        					<li><span class="flaticon-shower"></span>2</li>
+        					<li><span class="flaticon-king-size"></span>3</li>
+        					<li><span class="flaticon-mountains"></span>Mountain</li>
+        				</ul>
+        			</div>
+        		</div>
+        	</div>
+        </div>
+    	</div>
+    </section>
+	
+	<section class="ftco-section">
+    	<div class="container">
+    		<div class="row justify-content-center">
+          <div class="col-md-12 heading-section text-center ftco-animate">
+            <h2 class="mb-4">Best Place </h2>
+          </div>
+        </div>
+        <div class="row">
+        	<div class="col-md-3 ftco-animate">
+        		<div class="project-destination">
+        			<a href="#" class="img" style="background-image: url(images/sayt/Naryn/Tash_Rabat/tash-rabat.jpg);">
+        				<div class="text">
+        					<h3>Naryn</h3>
+        					<span>5 Tours</span>
+        				</div>
+        			</a>
+        		</div>
+        	</div>
+        	<div class="col-md-3 ftco-animate">
+        		<div class="project-destination">
+        			<a href="#" class="img" style="background-image: url(images/sayt/IK/three-crowns.jpg);">
+        				<div class="text">
+        					<h3>Issyk - kul</h3>
+        					<span>2 Tours</span>
+        				</div>
+        			</a>
+        		</div>
+        	</div>
+        	<div class="col-md-3 ftco-animate">
+        		<div class="project-destination">
+        			<a href="#" class="img" style="background-image: url(images/sayt/JA/ja.jpg);">
+        				<div class="text">
+        					<h3>Sary - Chelek</h3>
+        					<span>5 Tours</span>
+        				</div>
+        			</a>
+        		</div>
+        	</div>
+        	<div class="col-md-3 ftco-animate">
+        		<div class="project-destination">
+        			<a href="#" class="img" style="background-image: url(images/sayt/Naryn/Salkyn_tor/3450439.jpg);">
+        				<div class="text">
+        					<h3>Ala Kul</h3>
+        					<span>2 Tours</span>
+        				</div>
+        			</a>
+        		</div>
+			</div>
+			
+    	</div>
+    </section>
+
+    <section class="ftco-counter img" id="section-counter">
+    	<div class="container">
+    		<div class="row d-flex">
+    			<div class="col-md-6 d-flex">
+    				<div class="img d-flex align-self-stretch" style="background-image:url(images/about.jpg);"></div>
+    			</div>
+    			<div class="col-md-6 pl-md-5 py-5">
+    				<div class="row justify-content-start pb-3">
+		          <div class="col-md-12 heading-section ftco-animate">
+		            <h2 class="mb-4">Make Your Tour Memorable and Safe With Us</h2>
+		            <p></div>
+		        </div>
+		    		<div class="row">
+		          <div class="col-md-4 justify-content-center counter-wrap ftco-animate">
+		            <div class="block-18 text-center mb-4">
+		              <div class="text">
+		                <strong class="number" data-number="300">0</strong>
+		                <span>Successful Tours</span>
+		              </div>
+		            </div>
+		          </div>
+		          <div class="col-md-4 justify-content-center counter-wrap ftco-animate">
+		            <div class="block-18 text-center mb-4">
+		              <div class="text">
+		                <strong class="number" data-number="24000">0</strong>
+		                <span>Happy Tourist</span>
+		              </div>
+		            </div>
+		          </div>
+		          <div class="col-md-4 justify-content-center counter-wrap ftco-animate">
+		            <div class="block-18 text-center mb-4">
+		              <div class="text">
+		                <strong class="number" data-number="200">0</strong>
+		                <span>Place Explored</span>
+		              </div>
+		            </div>
+		          </div>
+		        </div>
+	        </div>
+        </div>
+    	</div>
+	</section>
+	
+    <section class="ftco-section testimony-section bg-bottom" style="background-image: url(images/bg_3.jpg);">
+      <div class="container">
+        <div class="row justify-content-center pb-4">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+            <h2 class="mb-4">Tourist Feedback</h2>
+          </div>
+        </div>
+        <div class="row ftco-animate">
+          <div class="col-md-12">
+            <div class="carousel-testimony owl-carousel ftco-owl">
+              <div class="item">
+                <div class="testimony-wrap py-4">
+                  <div class="text">
+                    <p class="mb-4">I really liked everything in Kyrgyzstan. The nature there is very beautiful. There are high mountains, many beautiful places.</p>
+                    <div class="d-flex align-items-center">
+                    	<div class="user-img" style="background-image: url(images/person_1.jpg)"></div>
+                    	<div class="pl-3">
+		                    <p class="name">Dwayne Johnson</p>
+		                    <span class="position">Marketing Manager</span>
+		                  </div>
+	                  </div>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="testimony-wrap py-4">
+                  <div class="text">
+                    <p class="mb-4">Kyrgyzstan is very beautiful. I liked to ride horses and drink kymyz. There are very hospitable people there.</p>
+                    <div class="d-flex align-items-center">
+                    	<div class="user-img" style="background-image: url(images/person_2.jpg)"></div>
+                    	<div class="pl-3">
+		                    <p class="name">John Cena</p>
+		                    <span class="position">Marketing Manager</span>
+		                  </div>
+	                  </div>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="testimony-wrap py-4">
+                  <div class="text">
+                    <p class="mb-4">I was in Kyrgyzstan in October 2022, in the city of Karabalta and in the city of Kant. The climate, according to the locals, is changing and getting colder, possibly due to the collapse of industry and less emissions into the atmosphere.</p>
+                    <div class="d-flex align-items-center">
+                    	<div class="user-img" style="background-image: url(images/person_3.jpg)"></div>
+                    	<div class="pl-3">
+		                    <p class="name">Ilon Mask</p>
+		                    <span class="position">Marketing Manager</span>
+		                  </div>
+	                  </div>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="testimony-wrap py-4">
+                  <div class="text">
+                    <p class="mb-4">I really liked everything in Kyrgyzstan. The nature there is very beautiful. There are high mountains, many beautiful places.</p>
+                    <div class="d-flex align-items-center">
+                    	<div class="user-img" style="background-image: url(images/person_1.jpg)"></div>
+                    	<div class="pl-3">
+		                    <p class="name">Dwayne Johnson</p>
+		                    <span class="position">Marketing Manager</span>
+		                  </div>
+	                  </div>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="testimony-wrap py-4">
+                  <div class="text">
+                    <p class="mb-4">Kyrgyzstan is very beautiful. I liked to ride horses and drink kymyz. There are very hospitable people there.</p>
+                    <div class="d-flex align-items-center">
+                    	<div class="user-img" style="background-image: url(images/person_2.jpg)"></div>
+                    	<div class="pl-3">
+		                    <p class="name">John Cena</p>
+		                    <span class="position">Marketing Manager</span>
+		                  </div>
+	                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="ftco-section">
+      <div class="container">
+      	<div class="row justify-content-center pb-4">
+          <div class="col-md-12 heading-section text-center ftco-animate">
+            <h2 class="mb-4">Recent Post</h2>
+          </div>
+        </div>
+        <div class="row d-flex">
+          <div class="col-md-4 d-flex ftco-animate">
+          	<div class="blog-entry justify-content-end">
+              <a href="blog-single.html" class="block-20" style="background-image: url('images/image_1.jpg');">
+              </a>
+              <div class="text mt-3 float-right d-block">
+              	<div class="d-flex align-items-center mb-4 topp">
+              		<div class="one">
+              			<span class="day">21</span>
+              		</div>
+              		<div class="two">
+              			<span class="yr">2019</span>
+              			<span class="mos">August</span>
+              		</div>
+              	</div>
+                <h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
+                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 d-flex ftco-animate">
+          	<div class="blog-entry justify-content-end">
+              <a href="blog-single.html" class="block-20" style="background-image: url('images/image_2.jpg');">
+              </a>
+              <div class="text mt-3 float-right d-block">
+              	<div class="d-flex align-items-center mb-4 topp">
+              		<div class="one">
+              			<span class="day">21</span>
+              		</div>
+              		<div class="two">
+              			<span class="yr">2019</span>
+              			<span class="mos">August</span>
+              		</div>
+              	</div>
+                <h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
+                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 d-flex ftco-animate">
+          	<div class="blog-entry">
+              <a href="blog-single.html" class="block-20" style="background-image: url('images/image_3.jpg');">
+              </a>
+              <div class="text mt-3 float-right d-block">
+              	<div class="d-flex align-items-center mb-4 topp">
+              		<div class="one">
+              			<span class="day">21</span>
+              		</div>
+              		<div class="two">
+              			<span class="yr">2019</span>
+              			<span class="mos">August</span>
+              		</div>
+              	</div>
+                <h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
+                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+	<footer class="ftco-footer bg-bottom" style="background-image: url(images/footer-bg.jpg);">
+		<div class="container">
+		  <div class="row mb-5">
+			<div class="col-md">
+			  <div class="ftco-footer-widget mb-4">
+				<h2 class="ftco-heading-2">Vacation</h2>
+				<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+				<ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+				  <li class="ftco-animate"><a href="https://twitter.com/Nikemas3"><span class="icon-twitter"></span></a></li>
+				  <li class="ftco-animate"><a href="https://www.facebook.com/profile.php?id=100039089173906"><span class="icon-facebook"></span></a></li>
+				  <li class="ftco-animate"><a href="https://www.instagram.com/_yourkohai_/"><span class="icon-instagram"></span></a></li>
+				</ul>
+			  </div>
+			</div>
+			<div class="col-md">
+			  <div class="ftco-footer-widget mb-4 ml-md-5">
+				<h2 class="ftco-heading-2">Infromation</h2>
+				<ul class="list-unstyled">
+				  <li><a href="#" class="py-2 d-block">Online Enquiry</a></li>
+				  <li><a href="#" class="py-2 d-block">General Enquiries</a></li>
+				  <li><a href="#" class="py-2 d-block">Booking Conditions</a></li>
+				  <li><a href="#" class="py-2 d-block">Privacy and Policy</a></li>
+				  <li><a href="#" class="py-2 d-block">Refund Policy</a></li>
+				  <li><a href="#" class="py-2 d-block">Call Us</a></li>
+				</ul>
+			  </div>
+			</div>
+			<div class="col-md">
+			   <div class="ftco-footer-widget mb-4">
+				<h2 class="ftco-heading-2">Experience</h2>
+				<ul class="list-unstyled">
+				  <li><a href="#" class="py-2 d-block">Adventure</a></li>
+				  <li><a href="#" class="py-2 d-block">Hotel and Restaurant</a></li>
+				  <li><a href="#" class="py-2 d-block">Beach</a></li>
+				  <li><a href="#" class="py-2 d-block">Nature</a></li>
+				  <li><a href="#" class="py-2 d-block">Camping</a></li>
+				  <li><a href="#" class="py-2 d-block">Party</a></li>
+				</ul>
+			  </div>
+			</div>
+			<div class="col-md">
+			  <div class="ftco-footer-widget mb-4">
+				  <h2 class="ftco-heading-2">Have a Questions?</h2>
+				  <div class="block-23 mb-3">
+					<ul>
+					  <li><span class="icon icon-map-marker"></span><span class="text">Kyrgyzstan Naryn</span></li>
+					  <li><a href="#"><span class="icon icon-phone"></span><span class="text">+996 706 017 633</span></a></li>
+					  <li><a href="mailto:ardaktmntlove@gmail.com"><span class="icon icon-envelope"></span><span class="text">luxkunsss@gmail.com</span></a></li>
+					</ul>
+				  </div>
+			  </div>
+			</div>
+		  </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+
+            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Naryn Travel</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+  
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+
+  
+
+
+  <script src="./SimpleChatbot-1.3.2/chatbot/fp2.js"></script>
+  <script src="./SimpleChatbot-1.3.2/chatbot/chatbot.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.easing.1.3.js"></script>
+  <script src="js/jquery.waypoints.min.js"></script>
+  <script src="js/jquery.stellar.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/aos.js"></script>
+  <script src="js/jquery.animateNumber.min.js"></script>
+  <script src="js/bootstrap-datepicker.js"></script>
+  <script src="js/scrollax.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="js/google-map.js"></script>
+  <script src="js/main.js"></script>
+    
+  </body>
+</html>
